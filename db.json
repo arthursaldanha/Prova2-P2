@@ -1,0 +1,59 @@
+{
+  "customer": [
+    {
+      "id": 1,
+      "name": "Arthur Saldanha",
+      "cpf": "12345678900",
+      "email": "saldanhadev@gmail.com",
+      "phone": "79 98136-6162",
+      "address": "Rua Laurindo Cerqueira, 120"
+    },
+    {
+      "id": 2,
+      "name": "Meyre Anúsia",
+      "cpf": "12345678900",
+      "email": "meyreanusia@gmail.com",
+      "phone": "79 91234-5678",
+      "address": "Na Lapa"
+    },
+    {
+      "name": "Arthur Saldanha",
+      "cpf": "046.710.215-52",
+      "email": "saldanhaodev@gmail.com",
+      "phone": "(79) 98136-6122",
+      "address": "Rua Laurindo Cerqueira 120",
+      "id": 3
+    },
+    {
+      "name": "Pedro Gustavo",
+      "cpf": "04671021552",
+      "email": "saldanhaodev@gmail.com",
+      "phone": "79999794599",
+      "address": "Rua",
+      "id": 4
+    },
+    {
+      "name": "Pedro Gustavo",
+      "cpf": "04671021552",
+      "email": "saldanhaodev@gmail.com",
+      "phone": "79999794599",
+      "address": "Rua",
+      "id": 5
+    }
+  ],
+  "books": [
+    {
+      "id": 1,
+      "name": "A Revolução dos Bichos",
+      "author": "Geroge Orwell",
+      "year": "1975"
+    },
+    {
+      "id": 2,
+      "name": "Ensaio sobre a cegueira",
+      "author": "José Saramago",
+      "year": "2003"
+    }
+  ],
+  "rent": []
+}
