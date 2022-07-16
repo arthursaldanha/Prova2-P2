@@ -5,5 +5,5 @@ export interface Book {
    author: string;
    edition: string;
    publishingCompany?: string;
-   publicationDate?: string | Date;
+   publicationDate?: string;
 }

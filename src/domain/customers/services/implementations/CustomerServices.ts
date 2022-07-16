@@ -19,16 +19,24 @@ export class CustomerServices implements CardServiceSkeleton {
       return data;
    }
 
-   async readCustomers() {
-      const { data } = await axios.get<Array<Customer>>(
-         "http://localhost:6789/customer"
+   async readUniqueCustomer(customerId: number) {
+      const { data } = await axios.get<Customer>(
+         `http://localhost:6789/customer/${customerId}`
       );
 
       return data;
    }
 
-   async updateCustomer({ id, name, cpf, email, phone, address }: Customer) {
-      const { data } = await axios.post<Array<Customer>>(
+   async readCustomers() {
+      const { data } = await axios.get<Array<Customer>>(
+         `http://localhost:6789/customer`
+      );
+
+      return data;
+   }
+
+   async updateCustomer(id: number, { name, cpf, email, phone, address }: Customer) {
+      const { data } = await axios.put<Array<Customer>>(
          `http://localhost:6789/customer/${id}`,
          {
             name,
@@ -42,7 +50,7 @@ export class CustomerServices implements CardServiceSkeleton {
       return data;
    }
 
-   async deleteCustomer(customerId: string) {
+   async deleteCustomer(customerId: number) {
       const { data } = await axios.delete<Array<Customer>>(
          `http://localhost:6789/customer/${customerId}`
       );

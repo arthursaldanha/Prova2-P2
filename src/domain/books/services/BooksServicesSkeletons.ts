@@ -9,9 +9,9 @@ export interface BookServicesSkeleton {
       publicationDate,
       publishingCompany,
    }: Book) => Promise<Array<Book>>;
+   readUniqueBook: (bookId: number) => Promise<Book>;
    readBooks: () => Promise<Array<Book>>;
-   updateBook: ({
-      id,
+   updateBook: (id: number, {
       name,
       description,
       author,
@@ -19,5 +19,5 @@ export interface BookServicesSkeleton {
       publicationDate,
       publishingCompany,
    }: Book) => Promise<Array<Book>>;
-   deleteBook: (bookId: string) => Promise<Array<Book>>;
+   deleteBook: (bookId: number) => Promise<Array<Book>>;
 }

@@ -14,6 +14,7 @@ import {
    FormErrorMessage,
 } from '@chakra-ui/react'
 import { useFormik } from 'formik';
+import { useEffect } from 'react';
 import { Customer } from '../../../domain/customers/types';
 import { createCustomer } from '../../../domain/customers/validations';
 
@@ -21,9 +22,11 @@ interface ModalCreateCustomerProps {
    isOpen: boolean;
    onClose: () => void;
    onCreateCustomer: (data: Customer) => void;
+   customerToEdit: Customer | null;
+   onUpdateCustomer: (id: number, data: Customer) => void;
 }
 
-export const ModalCreateCustomer: React.FC<ModalCreateCustomerProps> = ({ isOpen, onClose, onCreateCustomer }) => {
+export const ModalCreateCustomer: React.FC<ModalCreateCustomerProps> = ({ isOpen, onClose, onCreateCustomer, customerToEdit, onUpdateCustomer }) => {
    const formik = useFormik({
       initialValues: {
          name: '',
@@ -34,14 +37,37 @@ export const ModalCreateCustomer: React.FC<ModalCreateCustomerProps> = ({ isOpen
       },
       validationSchema: createCustomer,
       onSubmit: (values: Customer) => {
+         if (customerToEdit) {
+            onUpdateCustomer(customerToEdit.id!, values);
+            formik.resetForm();
+            return;
+         }
          onCreateCustomer(values)
       },
    })
 
+   useEffect(() => {
+      formik.setValues({
+         ...formik.values,
+         name: customerToEdit?.name ?? '',
+         cpf: customerToEdit?.cpf ?? '',
+         email: customerToEdit?.email ?? '',
+         phone: customerToEdit?.phone ?? '',
+         address: customerToEdit?.address ?? '',
+      });
+   }, [customerToEdit])
+
    const { errors, touched } = formik
 
    return (
-      <Modal blockScrollOnMount={true} isOpen={isOpen} onClose={onClose}>
+      <Modal
+         blockScrollOnMount={true}
+         isOpen={isOpen}
+         onClose={() => {
+            onClose();
+            formik.resetForm();
+         }}
+      >
          <ModalOverlay />
          <ModalContent>
             <ModalHeader>Cadastrar cliente</ModalHeader>
@@ -123,7 +149,7 @@ export const ModalCreateCustomer: React.FC<ModalCreateCustomerProps> = ({ isOpen
                   Cancelar
                </Button>
 
-               <Button variant='ghost' onClick={() => formik.handleSubmit()}>Cadastrar</Button>
+               <Button variant='ghost' onClick={() => formik.handleSubmit()}>{customerToEdit ? 'Atualizar' : 'Cadastrar'}</Button>
             </ModalFooter>
          </ModalContent>
       </Modal>
