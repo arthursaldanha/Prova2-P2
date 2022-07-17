@@ -9,7 +9,7 @@ export class BooksServices implements BookServicesSkeleton {
       description,
       author,
       edition,
-      publicationDate,
+      publicationYear,
       publishingCompany,
       price,
       mulct
@@ -21,7 +21,7 @@ export class BooksServices implements BookServicesSkeleton {
             description,
             author,
             edition,
-            publicationDate,
+            publicationYear,
             publishingCompany,
             price,
             mulct
@@ -54,7 +54,7 @@ export class BooksServices implements BookServicesSkeleton {
          description,
          author,
          edition,
-         publicationDate,
+         publicationYear,
          publishingCompany,
          price,
          mulct
@@ -66,7 +66,7 @@ export class BooksServices implements BookServicesSkeleton {
             description,
             author,
             edition,
-            publicationDate,
+            publicationYear,
             publishingCompany,
             price,
             mulct

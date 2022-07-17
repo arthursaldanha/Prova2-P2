@@ -6,7 +6,7 @@ export interface BookServicesSkeleton {
       description,
       author,
       edition,
-      publicationDate,
+      publicationYear,
       publishingCompany,
       price,
       mulct
@@ -18,7 +18,7 @@ export interface BookServicesSkeleton {
       description,
       author,
       edition,
-      publicationDate,
+      publicationYear,
       publishingCompany,
       price,
       mulct

@@ -16,6 +16,7 @@ import {
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
 import { Book } from '../../../domain/books/types';
+import { createBook } from '../../../domain/books/validations';
 
 interface ModalCreateBookProps {
    isOpen: boolean;
@@ -33,24 +34,22 @@ export const ModalCreateBook: React.FC<ModalCreateBookProps> = ({ isOpen, onClos
          author: '',
          edition: '',
          publishingCompany: '',
-         publicationDate: '',
+         publicationYear: 0,
          price: 0,
          mulct: 0
       },
-      // validationSchema: createCustomer,
+      validationSchema: createBook,
       onSubmit: (values: Book) => {
          if (bookToEdit) {
             onUpdateBook(bookToEdit.id!, values);
             formik.resetForm();
             return;
          }
-         
+
          onCreateBook(values);
          formik.resetForm();
       },
    })
-
-   console.log(formik);
 
    useEffect(() => {
       formik.setValues({
@@ -60,7 +59,7 @@ export const ModalCreateBook: React.FC<ModalCreateBookProps> = ({ isOpen, onClos
          author: bookToEdit?.author ?? '',
          edition: bookToEdit?.edition ?? '',
          publishingCompany: bookToEdit?.publishingCompany ?? '',
-         publicationDate: bookToEdit?.publicationDate ?? new Date().toISOString(),
+         publicationYear: bookToEdit?.publicationYear ?? new Date().getFullYear(),
          price: bookToEdit?.price ?? 0,
          mulct: bookToEdit?.mulct ?? 0,
       });
@@ -79,7 +78,7 @@ export const ModalCreateBook: React.FC<ModalCreateBookProps> = ({ isOpen, onClos
       >
          <ModalOverlay />
          <ModalContent>
-            <ModalHeader>Cadastrar cliente</ModalHeader>
+            <ModalHeader>Cadastrar livro</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
                <Flex flexDirection={'column'} alignItems={'center'}>
@@ -148,21 +147,22 @@ export const ModalCreateBook: React.FC<ModalCreateBookProps> = ({ isOpen, onClos
                      <FormErrorMessage>{errors.publishingCompany}</FormErrorMessage>
                   </FormControl>
 
-                  <FormControl isInvalid={!!errors.publicationDate && touched.publicationDate} style={{ marginBottom: '16px' }}>
-                     <FormLabel htmlFor='publicationDate'>Data de publicação:</FormLabel>
+                  <FormControl isInvalid={!!errors.publicationYear && touched.publicationYear} style={{ marginBottom: '16px' }}>
+                     <FormLabel htmlFor='publicationYear'>Data de publicação:</FormLabel>
                      <Input
-                        id='publicationDate'
-                        name='publicationDate'
-                        type='date'
+                        id='publicationYear'
+                        name='publicationYear'
+                        type='number'
+                        maxLength={4}
                         onChange={formik.handleChange}
-                        value={formik.values.publicationDate}
+                        value={formik.values.publicationYear}
                         errorBorderColor='red.300'
                      />
-                     <FormErrorMessage>{errors.publicationDate}</FormErrorMessage>
+                     <FormErrorMessage>{errors.publicationYear}</FormErrorMessage>
                   </FormControl>
 
                   <FormControl isInvalid={!!errors.price && touched.price} style={{ marginBottom: '16px' }}>
-                     <FormLabel htmlFor='publicationDate'>Preço do livro:</FormLabel>
+                     <FormLabel htmlFor='price'>Preço do livro:</FormLabel>
                      <Input
                         id='price'
                         name='price'
@@ -190,14 +190,24 @@ export const ModalCreateBook: React.FC<ModalCreateBookProps> = ({ isOpen, onClos
             </ModalBody>
 
             <ModalFooter>
-               <Button variant='ghost' mr={3} onClick={() => {
-                  onClose();
-                  formik.resetForm();
-               }}>
+               <Button
+                  variant='outline'
+                  colorScheme='red'
+                  mr={3}
+                  onClick={() => {
+                     onClose();
+                     formik.resetForm();
+                  }}>
                   Cancelar
                </Button>
 
-               <Button colorScheme='blue' onClick={() => formik.handleSubmit()}>{bookToEdit ? 'Atualizar' : 'Cadastrar'}</Button>
+               <Button
+                  variant='solid'
+                  colorScheme='blue'
+                  onClick={() => formik.handleSubmit()}
+               >
+                  {bookToEdit ? 'Atualizar' : 'Cadastrar'}
+               </Button>
             </ModalFooter>
          </ModalContent>
       </Modal>

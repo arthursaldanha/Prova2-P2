@@ -5,7 +5,7 @@ export interface Book {
    author: string;
    edition: string;
    publishingCompany?: string;
-   publicationDate?: string;
+   publicationYear?: number;
    price: number;
    mulct: number;
 }

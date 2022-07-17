@@ -71,7 +71,6 @@ export function currency(value: string) {
       ).charAt(2)}`;
    }
 
-   console.log(value)
    return `R$ ${value}`;
 }
 

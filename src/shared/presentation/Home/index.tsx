@@ -23,6 +23,8 @@ import {
 } from '@chakra-ui/react'
 import { Wrapper } from './styles';
 import { unmask } from '../../utils/regex';
+import { Dialog } from '../../components/AlertDialog';
+import { cpf as maskCPF, phone as maskPhone } from '../../utils/masks';
 
 interface HomePresentationProps {
    customers: Array<Customer>
@@ -31,23 +33,13 @@ interface HomePresentationProps {
 export const HomePresentation: React.FC<HomePresentationProps> = ({ customers }) => {
    const toast = useToast();
    const { isOpen, onClose, onOpen } = useDisclosure();
+   const dialogDelete = useDisclosure();
    const [customersInDatabase, setCustomersInDatabase] = useState<Array<Customer>>(customers)
    const [isEditCustomer, setIsEditCustomer] = useState<Customer | null>(null)
-   const [searchItemOnTable, setSearchItemOnTable] = useState<string>('')
-
-   if (!customers.length) {
-      return <div>Não existem clientes em nossa base de cadastro!</div>
-   }
+   const [getIdToDelete, setGetIdToDelete] = useState<number | null>(null);
+   const [searchItemOnTable, setSearchItemOnTable] = useState<string>('');
 
    const customerServices = new CustomerServices()
-
-   useEffect(() => {
-      async function getAllCustomers() {
-         const data = await customerServices.readCustomers()
-         console.log(data);
-      }
-      getAllCustomers()
-   }, [isOpen])
 
    const onCreateCustomer = async (data: Customer) => {
       try {
@@ -129,11 +121,11 @@ export const HomePresentation: React.FC<HomePresentationProps> = ({ customers })
 
    function search(filter: string) {
       return filter.toLowerCase().includes(searchItemOnTable.toLowerCase());
-    }
-  
-    function searchOfId(id: number) {
+   }
+
+   function searchOfId(id: number) {
       return id.toString() === searchItemOnTable;
-    }
+   }
 
    return (
       <Wrapper>
@@ -141,56 +133,88 @@ export const HomePresentation: React.FC<HomePresentationProps> = ({ customers })
             <Button onClick={onOpen}>Cadastrar cliente</Button>
             <Input placeholder='Pesquisar por clientes' value={searchItemOnTable} onChange={(e: any) => setSearchItemOnTable(e.target.value)} />
          </header>
-         <TableContainer width={'100%'}>
-            <Table variant='simple'>
-               <TableCaption>Imperial to metric conversion factors</TableCaption>
-               <Thead>
-                  <Tr>
-                     <Th>ID</Th>
-                     <Th>Nome</Th>
-                     <Th>CPF</Th>
-                     <Th>Email</Th>
-                     <Th>Telefone</Th>
-                     <Th>Endereço</Th>
-                     <Th>Editar</Th>
-                     <Th>Excluir</Th>
-                  </Tr>
-               </Thead>
-               <Tbody>
-                  {customersInDatabase
-                     .filter(({id, name, cpf, email, phone, address}) => 
-                        search(name) || 
-                        search(unmask(cpf)) || 
-                        search(email) || 
-                        search(unmask(phone)) || 
-                        search(address) || 
-                        searchOfId(id!)
-                     )
-                     .map(({ id, name, cpf, email, phone, address }) => (
-                        <Tr key={id}>
-                           <Td>{id}</Td>
-                           <Td>{name}</Td>
-                           <Td>{cpf}</Td>
-                           <Td>{email}</Td>
-                           <Td>{phone}</Td>
-                           <Td>{address}</Td>
-                           <Td onClick={() => handleClickEditCustomer(id!)}>
-                              <MdModeEdit title="Editar cliente" size={24} />
-                           </Td>
-                           <Td onClick={() => onDeleteCustomer(id!)}>
-                              <BsFillTrashFill title="Excluir cliente" size={24} />
-                           </Td>
-                        </Tr>
-                     ))}
-               </Tbody>
-            </Table>
-         </TableContainer>
+         {!customersInDatabase.length ? (
+            <div>Não existem clientes em nossa base de cadastro!</div>
+         ) : (
+            <TableContainer width={'100%'}>
+               <Table variant='simple'>
+                  <TableCaption>Imperial to metric conversion factors</TableCaption>
+                  <Thead>
+                     <Tr>
+                        <Th>ID</Th>
+                        <Th>Nome</Th>
+                        <Th>CPF</Th>
+                        <Th>Email</Th>
+                        <Th>Telefone</Th>
+                        <Th>Endereço</Th>
+                        <Th>Editar</Th>
+                        <Th>Excluir</Th>
+                     </Tr>
+                  </Thead>
+                  <Tbody>
+                     {customersInDatabase
+                        .filter(({ id, name, cpf, email, phone, address }) =>
+                           search(name) ||
+                           search(unmask(cpf)) ||
+                           search(email) ||
+                           search(unmask(phone)) ||
+                           search(address) ||
+                           searchOfId(id!)
+                        )
+                        .map(({ id, name, cpf, email, phone, address }) => (
+                           <Tr key={id}>
+                              <Td>{id}</Td>
+                              <Td>{name}</Td>
+                              <Td>{maskCPF(cpf)}</Td>
+                              <Td>{email}</Td>
+                              <Td>{maskPhone(phone)}</Td>
+                              <Td>{address}</Td>
+                              <Td>
+                                 <Button
+                                    variant='solid'
+                                    colorScheme='blue'
+                                    onClick={() => handleClickEditCustomer(id!)}
+                                 >
+                                    Editar
+                                 </Button>
+                              </Td>
+                              <Td>
+                                 <Button
+                                    variant='solid'
+                                    colorScheme='red'
+                                    onClick={() => {
+                                       setGetIdToDelete(id!)
+                                       dialogDelete.onOpen();
+                                    }}
+                                 >
+                                    Apagar
+                                 </Button>
+                              </Td>
+                           </Tr>
+                        ))}
+                  </Tbody>
+               </Table>
+            </TableContainer>
+         )}
          <ModalCreateCustomer
             isOpen={isOpen}
             onClose={onClose}
             onCreateCustomer={onCreateCustomer}
             customerToEdit={isEditCustomer}
             onUpdateCustomer={onUpdateCustomer}
+         />
+         <Dialog
+            isOpen={dialogDelete.isOpen}
+            onClose={dialogDelete.onClose}
+            type='error'
+            header='Apagar locação'
+            message='Você tem certeza que deseja continuar? Ao excluir, esta ação não poderá ser desfeita!'
+            buttonContinue='Apagar'
+            onClickContinue={async () => {
+               await onDeleteCustomer(getIdToDelete!);
+               setGetIdToDelete(null);
+               dialogDelete.onClose();
+            }}
          />
       </Wrapper>
    )

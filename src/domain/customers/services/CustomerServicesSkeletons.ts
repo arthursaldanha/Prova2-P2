@@ -1,6 +1,6 @@
 import { Customer } from "../types/index";
 
-export interface CardServiceSkeleton {
+export interface CustomerServiceSkeleton {
    createCustomer: ({
       name,
       cpf,

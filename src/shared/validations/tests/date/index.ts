@@ -12,4 +12,13 @@ const isCheckingDate = (value: string) => {
    );
 };
 
-export { isCheckingDate };
+const isCheckingYear = (value: string) => {
+   const currentYear = new Date().getFullYear();
+   const formattedYear = Number(value ?? 0);
+
+   if (currentYear > formattedYear) return false
+
+   return true
+};
+
+export { isCheckingDate, isCheckingYear };

@@ -1,11 +1,11 @@
 {
   "customer": [
     {
-      "name": "Arthur Oliveira",
-      "cpf": "046.710.215-52",
-      "email": "saldanhaodev@gmail.com",
-      "phone": "(79) 98136-6122",
-      "address": "Rua Laurindo Cerqueira 120",
+      "name": "Arthur Saldanha de Oliveira Santana",
+      "cpf": "33408947520",
+      "email": "kdjaskdja@jfskjfk.com",
+      "phone": "79981169065",
+      "address": "Rua Laurindo Cerqueira",
       "id": 1
     },
     {
@@ -15,46 +15,78 @@
       "phone": "75912345678",
       "address": "Praça José Ferreira da Silva",
       "id": 2
+    },
+    {
+      "name": "Arthur Saldanha de Oliveira Santana",
+      "cpf": "04671021552",
+      "email": "saldanhadev@gmail.com",
+      "phone": "79981169065",
+      "address": "Rua Laurindo Cerqueira",
+      "id": 4
     }
   ],
   "books": [
     {
-      "name": "ddaw",
-      "description": "daw",
-      "author": "daw",
-      "edition": "daw",
-      "publicationDate": "2022-07-05",
-      "publishingCompany": "daw",
+      "name": "A Revolução dos Bichos",
+      "description": "-",
+      "author": "George Orwell",
+      "edition": "1ª",
+      "publicationYear": "1975",
+      "publishingCompany": "Companhia das Letras",
       "price": 32.2,
       "mulct": 32,
       "id": 1
+    },
+    {
+      "name": "fefwefwe",
+      "description": "fwefwefwe",
+      "author": "fwefwefwe",
+      "edition": "fwefwefwef",
+      "publicationYear": 2022,
+      "publishingCompany": "fweffaff",
+      "price": 23,
+      "mulct": 11,
+      "id": 2
+    },
+    {
+      "name": "Atlassian | BitBucket",
+      "description": "dqwd",
+      "author": "dqw",
+      "edition": "dqw",
+      "publicationYear": 2022,
+      "publishingCompany": "dqwd",
+      "price": 23,
+      "mulct": 32,
+      "id": 3
     }
   ],
   "rent": [
     {
-      "id": 1,
       "customer": {
-        "name": "Arthur Oliveira",
-        "cpf": "046.710.215-52",
-        "email": "saldanhaodev@gmail.com",
-        "phone": "(79) 98136-6122",
-        "address": "Rua Laurindo Cerqueira 120",
+        "name": "Arthur Saldanha de Oliveira Santana",
+        "cpf": "04671021552",
+        "email": "saldanhadev@gmail.com",
+        "phone": "79981169065",
+        "address": "Rua Laurindo Cerqueira",
+        "id": 4
+      },
+      "book": {
+        "name": "A Revolução dos Bichos",
+        "description": "-",
+        "author": "George Orwell",
+        "edition": "1ª",
+        "publicationYear": "1975",
+        "publishingCompany": "Companhia das Letras",
+        "price": 32.2,
+        "mulct": 32,
         "id": 1
       },
-      "books": [
-        {
-          "id": 1,
-          "name": "A Revolução dos Bichos",
-          "author": "Geroge Orwell",
-          "year": "1975"
-        },
-        {
-          "id": 2,
-          "name": "Ensaio sobre a cegueira",
-          "author": "José Saramago",
-          "year": "2003"
-        }
-      ]
+      "prices": {
+        "totalDays": 2,
+        "totalPrice": 64.4,
+        "possiblyMulct": 64
+      },
+      "id": 2
     }
   ]
 }

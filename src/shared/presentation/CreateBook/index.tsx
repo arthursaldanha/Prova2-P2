@@ -21,6 +21,7 @@ import { BooksServices } from '../../../domain/books/services/implementations/Bo
 import { Book } from '../../../domain/books/types'
 import { ModalCreateBook } from '../ModalCreateBook'
 import { format, parseISO } from 'date-fns'
+import { Dialog } from '../../components/AlertDialog'
 
 interface HomePresentationProps {
    books: Array<Book>
@@ -28,24 +29,16 @@ interface HomePresentationProps {
 
 export const CreateBookPresentation: React.FC<HomePresentationProps> = ({ books }) => {
    const toast = useToast();
-   const { isOpen, onClose, onOpen } = useDisclosure();
-   const [booksInDatabase, setBooksInDatabase] = useState<Array<Book>>(books)
-   const [isEditBook, setIsEditBook] = useState<Book | null>(null)
-   const [searchBookOnTable, setSearchBookOnTable] = useState('')
 
-   if (!books.length) {
-      return <div>Não existem clientes em nossa base de cadastro!</div>
-   }
+   const { isOpen, onClose, onOpen } = useDisclosure();
+   const dialogDelete = useDisclosure();
+
+   const [booksInDatabase, setBooksInDatabase] = useState<Array<Book>>(books);
+   const [isEditBook, setIsEditBook] = useState<Book | null>(null);
+   const [getIdToDelete, setGetIdToDelete] = useState<number | null>(null);
+   const [searchBookOnTable, setSearchBookOnTable] = useState('');
 
    const bookServices = new BooksServices()
-
-   useEffect(() => {
-      async function getAllBooks() {
-         const data = await bookServices.readBooks()
-         console.log(data);
-      }
-      getAllBooks()
-   }, [isOpen])
 
    const onCreateBook = async (data: Book) => {
       try {
@@ -125,64 +118,119 @@ export const CreateBookPresentation: React.FC<HomePresentationProps> = ({ books 
       }
    }
 
+   function search(filter: string) {
+      return filter.toLowerCase().includes(searchBookOnTable.toLowerCase());
+   }
+
+   function searchNumber(id: number) {
+      return id.toString() === searchBookOnTable;
+   }
+
    return (
       <Wrapper>
          <header>
             <Button onClick={onOpen}>Cadastrar livro</Button>
             <Input placeholder='Pesquisar por livros' value={searchBookOnTable} onChange={(e: any) => setSearchBookOnTable(e.target.value)} />
          </header>
-         <TableContainer width={'100%'}>
-            <Table variant='simple'>
-               <TableCaption>Imperial to metric conversion factors</TableCaption>
-               <Thead>
-                  <Tr>
-                     <Th>ID</Th>
-                     <Th>Nome</Th>
-                     {/* TODO abrir modal quando clicar na descrição */}
-                     <Th>Descrição</Th>
-                     <Th>Autor</Th>
-                     <Th>Edição</Th>
-                     <Th>Data de Publicação</Th>
-                     <Th>Editora</Th>
-                     <Th>Valor</Th>
-                     <Th>Multa</Th>
-                     <Th>Editar</Th>
-                     <Th>Excluir</Th>
-                  </Tr>
-               </Thead>
-               <Tbody>
-                  {booksInDatabase.map(({ id, name, description, author, edition, publicationDate, publishingCompany, price, mulct }) => (
-                     <Tr key={id}>
-                        <Td>{id}</Td>
-                        <Td>{name}</Td>
-                        <Td>{description ? description : '-'}</Td>
-                        <Td>{author}</Td>
-                        <Td>{edition}</Td>
-                        <Td>{publicationDate ? format(parseISO(publicationDate), 'dd/MM/yyyy') : '-'}</Td>
-                        <Td>{publishingCompany ? publishingCompany : '-'}</Td>
-                        <Td>{price.toLocaleString('pt-BR', {
-                           style: 'currency',
-                           currency: 'BRL', 
-                           minimumFractionDigits: 2
-                        })}</Td>
-                        <Td>{mulct.toLocaleString('pt-BR', {
-                           style: 'currency',
-                           currency: 'BRL', 
-                           minimumFractionDigits: 2
-                        })}</Td>
-                        <Td onClick={() => handleClickEditBook(id!)}><MdModeEdit title="Editar cliente" size={24} /></Td>
-                        <Td onClick={() => onDeleteBook(id!)}><BsFillTrashFill title="Excluir cliente" size={24} /></Td>
+         {!booksInDatabase.length ? (
+            <div>Não existem clientes em nossa base de cadastro!</div>
+         ) : (
+            <TableContainer width={'100%'}>
+               <Table variant='simple'>
+                  <TableCaption>Imperial to metric conversion factors</TableCaption>
+                  <Thead>
+                     <Tr>
+                        <Th>ID</Th>
+                        <Th>Nome</Th>
+                        {/* TODO abrir modal quando clicar na descrição */}
+                        <Th>Descrição</Th>
+                        <Th>Autor</Th>
+                        <Th>Edição</Th>
+                        <Th>Data de Publicação</Th>
+                        <Th>Editora</Th>
+                        <Th>Valor</Th>
+                        <Th>Multa</Th>
+                        <Th>Editar</Th>
+                        <Th>Excluir</Th>
                      </Tr>
-                  ))}
-               </Tbody>
-            </Table>
-         </TableContainer>
+                  </Thead>
+                  <Tbody>
+                     {booksInDatabase
+                        .filter(({ id, name, author, edition, publicationYear, publishingCompany, price, mulct }) =>
+                           searchNumber(id!) ||
+                           search(name) ||
+                           search(author) ||
+                           search(edition) ||
+                           searchNumber(publicationYear ?? 0) ||
+                           search(publishingCompany ?? '') ||
+                           searchNumber(price) ||
+                           searchNumber(mulct)
+                        )
+                        .map(({ id, name, description, author, edition, publicationYear, publishingCompany, price, mulct }) => (
+                           <Tr key={id}>
+                              <Td>{id}</Td>
+                              <Td>{name}</Td>
+                              <Td>{description ? description : '-'}</Td>
+                              <Td>{author}</Td>
+                              <Td>{edition}</Td>
+                              <Td>{publicationYear === 0 ? '-' : publicationYear}</Td>
+                              <Td>{publishingCompany ? publishingCompany : '-'}</Td>
+                              <Td>{price.toLocaleString('pt-BR', {
+                                 style: 'currency',
+                                 currency: 'BRL',
+                                 minimumFractionDigits: 2
+                              })}</Td>
+                              <Td>{mulct.toLocaleString('pt-BR', {
+                                 style: 'currency',
+                                 currency: 'BRL',
+                                 minimumFractionDigits: 2
+                              })}</Td>
+                              <Td>
+                                 <Button
+                                    variant='solid'
+                                    colorScheme='blue'
+                                    onClick={() => handleClickEditBook(id!)}
+                                 >
+                                    Editar
+                                 </Button>
+                              </Td>
+                              <Td>
+                                 <Button
+                                    variant='solid'
+                                    colorScheme='red'
+                                    onClick={() => {
+                                       setGetIdToDelete(id!)
+                                       dialogDelete.onOpen();
+                                    }}
+                                 >
+                                    Apagar
+                                 </Button>
+                              </Td>
+                           </Tr>
+                        ))}
+                  </Tbody>
+               </Table>
+            </TableContainer>
+         )}
          <ModalCreateBook
             isOpen={isOpen}
             onClose={onClose}
             onCreateBook={onCreateBook}
             bookToEdit={isEditBook}
             onUpdateBook={onUpdateBook}
+         />
+         <Dialog
+            isOpen={dialogDelete.isOpen}
+            onClose={dialogDelete.onClose}
+            type='error'
+            header='Apagar locação'
+            message='Você tem certeza que deseja continuar? Ao excluir, esta ação não poderá ser desfeita!'
+            buttonContinue='Apagar'
+            onClickContinue={async () => {
+               await onDeleteBook(getIdToDelete!);
+               setGetIdToDelete(null);
+               dialogDelete.onClose();
+            }}
          />
       </Wrapper>
    )

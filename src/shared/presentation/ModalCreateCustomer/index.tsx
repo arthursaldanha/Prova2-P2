@@ -142,14 +142,24 @@ export const ModalCreateCustomer: React.FC<ModalCreateCustomerProps> = ({ isOpen
             </ModalBody>
 
             <ModalFooter>
-               <Button colorScheme='blue' mr={3} onClick={() => {
-                  onClose();
-                  formik.resetForm();
-               }}>
+               <Button
+                  variant='outline'
+                  colorScheme='red'
+                  mr={3}
+                  onClick={() => {
+                     onClose();
+                     formik.resetForm();
+                  }}>
                   Cancelar
                </Button>
 
-               <Button variant='ghost' onClick={() => formik.handleSubmit()}>{customerToEdit ? 'Atualizar' : 'Cadastrar'}</Button>
+               <Button
+                  variant='solid'
+                  colorScheme='blue'
+                  onClick={() => formik.handleSubmit()}
+               >
+                  {customerToEdit ? 'Atualizar' : 'Cadastrar'}
+               </Button>
             </ModalFooter>
          </ModalContent>
       </Modal>

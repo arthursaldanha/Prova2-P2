@@ -1,8 +1,8 @@
 import * as yup from 'yup';
-import { fullNameRegex, phoneRegex } from '../../utils/regex';
+import { fullNameRegex, phoneRegex, unmask } from '../../utils/regex';
 
 import { checkCpfIsValid } from '../tests/cpf';
-import { isCheckingDate } from '../tests/date';
+import { isCheckingDate, isCheckingYear } from '../tests/date';
 import { isCheckingPhone } from '../tests/phone';
 
 const email = yup
@@ -31,12 +31,63 @@ const phone = yup
       return result;
    });
 
-const date = yup.string().test('testDate', 'Informe uma data válida', value => {
-   const result = isCheckingDate(value ?? '');
-   return result;
-});
+const date = yup
+   .string()
+   .test('testDate', 'Informe uma data válida', value => {
+      const result = isCheckingDate(value ?? '');
+      return result;
+   });
+
+const year = yup
+   .string()
+   .test('testYear', 'Informe um ano válido', value => {
+      const result = isCheckingYear(value ?? '');
+      return result;
+   });
 
 const address = yup.string();
+
+const titleBook = yup
+   .string()
+   .required('Título do livro obrigatório')
+
+const description = yup
+   .string()
+   .required('Descrição obrigatório')
+
+const edition = yup
+   .string()
+   .required('Autor obrigatório')
+
+const publishingCompany = yup
+   .string()
+   .required('Editora obrigatório')
+
+const price = yup
+   .number()
+   .test('testPrices', 'Informe um valor superior a 0', value => {
+      const unmaskedDays = value;
+
+      if (isNaN(Number(unmaskedDays)) || Number(unmaskedDays) <= 0) return false
+
+      return true
+   })
+   .required('Dias obrigatório');
+
+const customer = yup.string().required('Cliente obrigatório');
+
+const book = yup.string().required('Livro obrigatório');
+
+const daysToRent = yup
+   .number()
+   .test('testdays', 'Informe um número superior a 0', value => {
+      const unmaskedDays = value;
+
+      if (isNaN(Number(unmaskedDays)) || Number(unmaskedDays) <= 0) return false
+
+      return true
+   })
+   .required('Dias obrigatório');
 
 export {
    name,
@@ -45,4 +96,13 @@ export {
    phone,
    address,
    date,
+   year,
+   titleBook,
+   description,
+   edition,
+   publishingCompany,
+   price,
+   customer,
+   book,
+   daysToRent,
 };

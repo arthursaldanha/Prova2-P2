@@ -1,9 +1,9 @@
 
 import axios from "axios";
 import { Customer } from "../../types/index";
-import { CardServiceSkeleton } from "../CustomerServicesSkeletons";
+import { CustomerServiceSkeleton } from "../CustomerServicesSkeletons";
 
-export class CustomerServices implements CardServiceSkeleton {
+export class CustomerServices implements CustomerServiceSkeleton {
    async createCustomer({ name, cpf, email, phone, address }: Customer) {
       const { data } = await axios.post<Array<Customer>>(
          "http://localhost:6789/customer",
