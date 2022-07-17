@@ -6,4 +6,6 @@ export interface Book {
    edition: string;
    publishingCompany?: string;
    publicationDate?: string;
+   price: number;
+   mulct: number;
 }

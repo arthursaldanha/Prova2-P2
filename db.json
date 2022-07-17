@@ -19,26 +19,42 @@
   ],
   "books": [
     {
-      "id": 1,
-      "name": "A Revolução dos Bichos",
-      "author": "Geroge Orwell",
-      "year": "1975"
-    },
-    {
-      "id": 2,
-      "name": "Ensaio sobre a cegueira",
-      "author": "José Saramago",
-      "year": "2003"
-    },
-    {
-      "name": "Teste",
-      "description": "aea",
-      "author": "Arthur Saldanha",
-      "edition": "9º",
-      "publicationDate": "2022-07-13",
-      "publishingCompany": "Chevrolet",
-      "id": 3
+      "name": "ddaw",
+      "description": "daw",
+      "author": "daw",
+      "edition": "daw",
+      "publicationDate": "2022-07-05",
+      "publishingCompany": "daw",
+      "price": 32.2,
+      "mulct": 32,
+      "id": 1
     }
   ],
-  "rent": []
+  "rent": [
+    {
+      "id": 1,
+      "customer": {
+        "name": "Arthur Oliveira",
+        "cpf": "046.710.215-52",
+        "email": "saldanhaodev@gmail.com",
+        "phone": "(79) 98136-6122",
+        "address": "Rua Laurindo Cerqueira 120",
+        "id": 1
+      },
+      "books": [
+        {
+          "id": 1,
+          "name": "A Revolução dos Bichos",
+          "author": "Geroge Orwell",
+          "year": "1975"
+        },
+        {
+          "id": 2,
+          "name": "Ensaio sobre a cegueira",
+          "author": "José Saramago",
+          "year": "2003"
+        }
+      ]
+    }
+  ]
 }

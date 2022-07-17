@@ -18,8 +18,11 @@ import {
    Td,
    TableCaption,
    TableContainer,
+   Input,
+   Highlight
 } from '@chakra-ui/react'
 import { Wrapper } from './styles';
+import { unmask } from '../../utils/regex';
 
 interface HomePresentationProps {
    customers: Array<Customer>
@@ -30,6 +33,7 @@ export const HomePresentation: React.FC<HomePresentationProps> = ({ customers })
    const { isOpen, onClose, onOpen } = useDisclosure();
    const [customersInDatabase, setCustomersInDatabase] = useState<Array<Customer>>(customers)
    const [isEditCustomer, setIsEditCustomer] = useState<Customer | null>(null)
+   const [searchItemOnTable, setSearchItemOnTable] = useState<string>('')
 
    if (!customers.length) {
       return <div>Não existem clientes em nossa base de cadastro!</div>
@@ -123,10 +127,21 @@ export const HomePresentation: React.FC<HomePresentationProps> = ({ customers })
       }
    }
 
+   function search(filter: string) {
+      return filter.toLowerCase().includes(searchItemOnTable.toLowerCase());
+    }
+  
+    function searchOfId(id: number) {
+      return id.toString() === searchItemOnTable;
+    }
+
    return (
       <Wrapper>
-         <Button onClick={onOpen}>Cadastrar cliente</Button>
-         <TableContainer>
+         <header>
+            <Button onClick={onOpen}>Cadastrar cliente</Button>
+            <Input placeholder='Pesquisar por clientes' value={searchItemOnTable} onChange={(e: any) => setSearchItemOnTable(e.target.value)} />
+         </header>
+         <TableContainer width={'100%'}>
             <Table variant='simple'>
                <TableCaption>Imperial to metric conversion factors</TableCaption>
                <Thead>
@@ -142,18 +157,31 @@ export const HomePresentation: React.FC<HomePresentationProps> = ({ customers })
                   </Tr>
                </Thead>
                <Tbody>
-                  {customersInDatabase.map(({ id, name, cpf, email, phone, address }) => (
-                     <Tr key={id}>
-                        <Td>{id}</Td>
-                        <Td>{name}</Td>
-                        <Td>{cpf}</Td>
-                        <Td>{email}</Td>
-                        <Td>{phone}</Td>
-                        <Td>{address}</Td>
-                        <Td onClick={() => handleClickEditCustomer(id!)}><MdModeEdit title="Editar cliente" size={24} /></Td>
-                        <Td onClick={() => onDeleteCustomer(id!)}><BsFillTrashFill title="Excluir cliente" size={24} /></Td>
-                     </Tr>
-                  ))}
+                  {customersInDatabase
+                     .filter(({id, name, cpf, email, phone, address}) => 
+                        search(name) || 
+                        search(unmask(cpf)) || 
+                        search(email) || 
+                        search(unmask(phone)) || 
+                        search(address) || 
+                        searchOfId(id!)
+                     )
+                     .map(({ id, name, cpf, email, phone, address }) => (
+                        <Tr key={id}>
+                           <Td>{id}</Td>
+                           <Td>{name}</Td>
+                           <Td>{cpf}</Td>
+                           <Td>{email}</Td>
+                           <Td>{phone}</Td>
+                           <Td>{address}</Td>
+                           <Td onClick={() => handleClickEditCustomer(id!)}>
+                              <MdModeEdit title="Editar cliente" size={24} />
+                           </Td>
+                           <Td onClick={() => onDeleteCustomer(id!)}>
+                              <BsFillTrashFill title="Excluir cliente" size={24} />
+                           </Td>
+                        </Tr>
+                     ))}
                </Tbody>
             </Table>
          </TableContainer>

@@ -11,6 +11,8 @@ export class BooksServices implements BookServicesSkeleton {
       edition,
       publicationDate,
       publishingCompany,
+      price,
+      mulct
    }: Book) {
       const { data } = await axios.post<Array<Book>>(
          "http://localhost:6789/books",
@@ -21,6 +23,8 @@ export class BooksServices implements BookServicesSkeleton {
             edition,
             publicationDate,
             publishingCompany,
+            price,
+            mulct
          }
       );
 
@@ -52,6 +56,8 @@ export class BooksServices implements BookServicesSkeleton {
          edition,
          publicationDate,
          publishingCompany,
+         price,
+         mulct
       }: Book) {
       const { data } = await axios.put<Array<Book>>(
          `http://localhost:6789/books/${id}`,
@@ -62,6 +68,8 @@ export class BooksServices implements BookServicesSkeleton {
             edition,
             publicationDate,
             publishingCompany,
+            price,
+            mulct
          }
       );
 

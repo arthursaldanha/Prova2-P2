@@ -14,6 +14,8 @@
       "@develop-fapp/ui-kit-fapp": "^0.1.75",
       "@emotion/react": "^11.9.3",
       "@emotion/styled": "^11.9.3",
+      "@hookform/error-message": "^2.0.0",
+      "@hookform/resolvers": "^2.9.6",
       "@next/eslint-plugin-next": "^12.2.2",
       "axios": "^0.27.2",
       "date-fns": "^2.28.0",
@@ -28,6 +30,7 @@
       "react": "18.2.0",
       "react-div-100vh": "^0.7.0",
       "react-dom": "18.2.0",
+      "react-hook-form": "^7.33.1",
       "react-icons": "^4.4.0",
       "styled-components": "^5.3.5",
       "yup": "^0.32.11"

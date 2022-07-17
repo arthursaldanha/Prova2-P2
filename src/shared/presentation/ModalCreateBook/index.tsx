@@ -16,7 +16,6 @@ import {
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
 import { Book } from '../../../domain/books/types';
-import { createCustomer } from '../../../domain/customers/validations';
 
 interface ModalCreateBookProps {
    isOpen: boolean;
@@ -35,6 +34,8 @@ export const ModalCreateBook: React.FC<ModalCreateBookProps> = ({ isOpen, onClos
          edition: '',
          publishingCompany: '',
          publicationDate: '',
+         price: 0,
+         mulct: 0
       },
       // validationSchema: createCustomer,
       onSubmit: (values: Book) => {
@@ -43,9 +44,13 @@ export const ModalCreateBook: React.FC<ModalCreateBookProps> = ({ isOpen, onClos
             formik.resetForm();
             return;
          }
-         onCreateBook(values)
+         
+         onCreateBook(values);
+         formik.resetForm();
       },
    })
+
+   console.log(formik);
 
    useEffect(() => {
       formik.setValues({
@@ -56,6 +61,8 @@ export const ModalCreateBook: React.FC<ModalCreateBookProps> = ({ isOpen, onClos
          edition: bookToEdit?.edition ?? '',
          publishingCompany: bookToEdit?.publishingCompany ?? '',
          publicationDate: bookToEdit?.publicationDate ?? new Date().toISOString(),
+         price: bookToEdit?.price ?? 0,
+         mulct: bookToEdit?.mulct ?? 0,
       });
    }, [bookToEdit])
 
@@ -142,7 +149,7 @@ export const ModalCreateBook: React.FC<ModalCreateBookProps> = ({ isOpen, onClos
                   </FormControl>
 
                   <FormControl isInvalid={!!errors.publicationDate && touched.publicationDate} style={{ marginBottom: '16px' }}>
-                     <FormLabel htmlFor='publicationDate'>Endereço:</FormLabel>
+                     <FormLabel htmlFor='publicationDate'>Data de publicação:</FormLabel>
                      <Input
                         id='publicationDate'
                         name='publicationDate'
@@ -153,18 +160,44 @@ export const ModalCreateBook: React.FC<ModalCreateBookProps> = ({ isOpen, onClos
                      />
                      <FormErrorMessage>{errors.publicationDate}</FormErrorMessage>
                   </FormControl>
+
+                  <FormControl isInvalid={!!errors.price && touched.price} style={{ marginBottom: '16px' }}>
+                     <FormLabel htmlFor='publicationDate'>Preço do livro:</FormLabel>
+                     <Input
+                        id='price'
+                        name='price'
+                        type='number'
+                        onChange={formik.handleChange}
+                        value={formik.values.price}
+                        errorBorderColor='red.300'
+                     />
+                     <FormErrorMessage>{errors.price}</FormErrorMessage>
+                  </FormControl>
+
+                  <FormControl isInvalid={!!errors.mulct && touched.mulct} style={{ marginBottom: '16px' }}>
+                     <FormLabel htmlFor='mulct'>Valor da multa:</FormLabel>
+                     <Input
+                        id='mulct'
+                        name='mulct'
+                        type='number'
+                        onChange={formik.handleChange}
+                        value={formik.values.mulct}
+                        errorBorderColor='red.300'
+                     />
+                     <FormErrorMessage>{errors.mulct}</FormErrorMessage>
+                  </FormControl>
                </Flex>
             </ModalBody>
 
             <ModalFooter>
-               <Button colorScheme='blue' mr={3} onClick={() => {
+               <Button variant='ghost' mr={3} onClick={() => {
                   onClose();
                   formik.resetForm();
                }}>
                   Cancelar
                </Button>
 
-               <Button variant='ghost' onClick={() => formik.handleSubmit()}>{bookToEdit ? 'Atualizar' : 'Cadastrar'}</Button>
+               <Button colorScheme='blue' onClick={() => formik.handleSubmit()}>{bookToEdit ? 'Atualizar' : 'Cadastrar'}</Button>
             </ModalFooter>
          </ModalContent>
       </Modal>

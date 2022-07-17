@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useToast } from '@chakra-ui/react'
+import { Input, useToast } from '@chakra-ui/react'
 import { useDisclosure } from '../../hooks/useDisclosure'
 
 import { MdModeEdit } from 'react-icons/md'
@@ -31,6 +31,7 @@ export const CreateBookPresentation: React.FC<HomePresentationProps> = ({ books 
    const { isOpen, onClose, onOpen } = useDisclosure();
    const [booksInDatabase, setBooksInDatabase] = useState<Array<Book>>(books)
    const [isEditBook, setIsEditBook] = useState<Book | null>(null)
+   const [searchBookOnTable, setSearchBookOnTable] = useState('')
 
    if (!books.length) {
       return <div>Não existem clientes em nossa base de cadastro!</div>
@@ -126,25 +127,31 @@ export const CreateBookPresentation: React.FC<HomePresentationProps> = ({ books 
 
    return (
       <Wrapper>
-         <Button onClick={onOpen}>Cadastrar livro</Button>
-         <TableContainer>
+         <header>
+            <Button onClick={onOpen}>Cadastrar livro</Button>
+            <Input placeholder='Pesquisar por livros' value={searchBookOnTable} onChange={(e: any) => setSearchBookOnTable(e.target.value)} />
+         </header>
+         <TableContainer width={'100%'}>
             <Table variant='simple'>
                <TableCaption>Imperial to metric conversion factors</TableCaption>
                <Thead>
                   <Tr>
                      <Th>ID</Th>
                      <Th>Nome</Th>
+                     {/* TODO abrir modal quando clicar na descrição */}
                      <Th>Descrição</Th>
                      <Th>Autor</Th>
                      <Th>Edição</Th>
                      <Th>Data de Publicação</Th>
                      <Th>Editora</Th>
+                     <Th>Valor</Th>
+                     <Th>Multa</Th>
                      <Th>Editar</Th>
                      <Th>Excluir</Th>
                   </Tr>
                </Thead>
                <Tbody>
-                  {booksInDatabase.map(({ id, name, description, author, edition, publicationDate, publishingCompany }) => (
+                  {booksInDatabase.map(({ id, name, description, author, edition, publicationDate, publishingCompany, price, mulct }) => (
                      <Tr key={id}>
                         <Td>{id}</Td>
                         <Td>{name}</Td>
@@ -153,6 +160,16 @@ export const CreateBookPresentation: React.FC<HomePresentationProps> = ({ books 
                         <Td>{edition}</Td>
                         <Td>{publicationDate ? format(parseISO(publicationDate), 'dd/MM/yyyy') : '-'}</Td>
                         <Td>{publishingCompany ? publishingCompany : '-'}</Td>
+                        <Td>{price.toLocaleString('pt-BR', {
+                           style: 'currency',
+                           currency: 'BRL', 
+                           minimumFractionDigits: 2
+                        })}</Td>
+                        <Td>{mulct.toLocaleString('pt-BR', {
+                           style: 'currency',
+                           currency: 'BRL', 
+                           minimumFractionDigits: 2
+                        })}</Td>
                         <Td onClick={() => handleClickEditBook(id!)}><MdModeEdit title="Editar cliente" size={24} /></Td>
                         <Td onClick={() => onDeleteBook(id!)}><BsFillTrashFill title="Excluir cliente" size={24} /></Td>
                      </Tr>

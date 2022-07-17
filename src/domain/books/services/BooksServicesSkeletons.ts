@@ -8,6 +8,8 @@ export interface BookServicesSkeleton {
       edition,
       publicationDate,
       publishingCompany,
+      price,
+      mulct
    }: Book) => Promise<Array<Book>>;
    readUniqueBook: (bookId: number) => Promise<Book>;
    readBooks: () => Promise<Array<Book>>;
@@ -18,6 +20,8 @@ export interface BookServicesSkeleton {
       edition,
       publicationDate,
       publishingCompany,
+      price,
+      mulct
    }: Book) => Promise<Array<Book>>;
    deleteBook: (bookId: number) => Promise<Array<Book>>;
 }
