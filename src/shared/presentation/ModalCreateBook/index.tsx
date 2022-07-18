@@ -9,6 +9,7 @@ import {
    ModalCloseButton,
    Button,
    Input,
+   Textarea,
    FormControl,
    FormLabel,
    FormErrorMessage,
@@ -97,10 +98,9 @@ export const ModalCreateBook: React.FC<ModalCreateBookProps> = ({ isOpen, onClos
 
                   <FormControl isInvalid={!!errors.description && touched.description} style={{ marginBottom: '16px' }}>
                      <FormLabel htmlFor='description'>Descrição:</FormLabel>
-                     <Input
+                     <Textarea
                         id='description'
                         name='description'
-                        type='string'
                         onChange={formik.handleChange}
                         value={formik.values.description}
                         errorBorderColor='red.300'

@@ -30,6 +30,7 @@ import { Book } from '../../../domain/books/types'
 import { BooksServices } from '../../../domain/books/services/implementations/BooksServices'
 import { Dialog } from '../../components/AlertDialog'
 import { cpf as maskCPF } from '../../utils/masks';
+import { formatPrice } from '../../utils/string'
 
 interface HomePresentationProps {
    rents: Array<Rent>
@@ -139,7 +140,7 @@ export const CreateRentPresentation: React.FC<HomePresentationProps> = ({ rents 
          ) : (
             <TableContainer width={'100%'}>
                <Table variant='simple'>
-                  <TableCaption>Imperial to metric conversion factors</TableCaption>
+                  <TableCaption>SM Systems</TableCaption>
                   <Thead>
                      <Tr>
                         <Th>ID</Th>
@@ -169,14 +170,14 @@ export const CreateRentPresentation: React.FC<HomePresentationProps> = ({ rents 
                            book: { name: title, author, edition },
                            prices: { totalPrice, possiblyMulct }
                         }) =>
-                           searchOfNumber(id!) ||
+                           search(String(id)) ||
                            search(name) ||
                            search(unmask(cpf)) ||
                            search(title) ||
                            search(author) ||
                            search(edition) ||
-                           searchOfNumber(totalPrice ?? 0) ||
-                           searchOfNumber(possiblyMulct ?? 0)
+                           search(String(totalPrice) ?? '') ||
+                           search(String(possiblyMulct) ?? '')
                         )
                         .map(({
                            id,
@@ -185,26 +186,14 @@ export const CreateRentPresentation: React.FC<HomePresentationProps> = ({ rents 
                            prices: { totalPrice, possiblyMulct }
                         }) => (
                            <Tr key={id}>
-                              <Td>{id}</Td>
-                              <Td>{name}</Td>
-                              <Td>{maskCPF(cpf)}</Td>
-                              <Td>{title}</Td>
-                              <Td>{author}</Td>
-                              <Td>{edition}</Td>
-                              <Td>{totalPrice
-                                 .toLocaleString('pt-BR', {
-                                    style: 'currency',
-                                    currency: 'BRL',
-                                    minimumFractionDigits: 2
-                                 })}
-                              </Td>
-                              <Td>{possiblyMulct
-                                 .toLocaleString('pt-BR', {
-                                    style: 'currency',
-                                    currency: 'BRL',
-                                    minimumFractionDigits: 2
-                                 })}
-                              </Td>
+                              <Td><Highlight query={searchItemOnTable ? searchItemOnTable : 'null'} styles={{ bg: 'orange.100' }}>{String(id)}</Highlight></Td>
+                              <Td><Highlight query={searchItemOnTable ? searchItemOnTable : 'null'} styles={{ bg: 'orange.100' }}>{name}</Highlight></Td>
+                              <Td><Highlight query={searchItemOnTable ? searchItemOnTable : 'null'} styles={{ bg: 'orange.100' }}>{cpf}</Highlight></Td>
+                              <Td><Highlight query={searchItemOnTable ? searchItemOnTable : 'null'} styles={{ bg: 'orange.100' }}>{title}</Highlight></Td>
+                              <Td><Highlight query={searchItemOnTable ? searchItemOnTable : 'null'} styles={{ bg: 'orange.100' }}>{author}</Highlight></Td>
+                              <Td><Highlight query={searchItemOnTable ? searchItemOnTable : 'null'} styles={{ bg: 'orange.100' }}>{edition}</Highlight></Td>
+                              <Td>{formatPrice(totalPrice)}</Td>
+                              <Td>{formatPrice(possiblyMulct)}</Td>
                               <Td>
                                  <Button
                                     variant='solid'

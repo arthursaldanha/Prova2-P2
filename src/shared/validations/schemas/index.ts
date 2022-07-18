@@ -53,7 +53,6 @@ const titleBook = yup
 
 const description = yup
    .string()
-   .required('Descrição obrigatório')
 
 const edition = yup
    .string()

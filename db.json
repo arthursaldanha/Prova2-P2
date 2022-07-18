@@ -58,6 +58,17 @@
       "price": 23,
       "mulct": 32,
       "id": 3
+    },
+    {
+      "name": "fwefwe",
+      "description": "",
+      "author": "fwefew fwefew",
+      "edition": "fwef",
+      "publicationYear": 2022,
+      "publishingCompany": "fwefw",
+      "price": 2,
+      "mulct": 2,
+      "id": 4
     }
   ],
   "rent": [

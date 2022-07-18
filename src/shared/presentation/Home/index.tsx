@@ -138,7 +138,7 @@ export const HomePresentation: React.FC<HomePresentationProps> = ({ customers })
          ) : (
             <TableContainer width={'100%'}>
                <Table variant='simple'>
-                  <TableCaption>Imperial to metric conversion factors</TableCaption>
+                  <TableCaption>SM Systems</TableCaption>
                   <Thead>
                      <Tr>
                         <Th>ID</Th>
@@ -154,21 +154,21 @@ export const HomePresentation: React.FC<HomePresentationProps> = ({ customers })
                   <Tbody>
                      {customersInDatabase
                         .filter(({ id, name, cpf, email, phone, address }) =>
+                           search(String(id)) ||
                            search(name) ||
                            search(unmask(cpf)) ||
                            search(email) ||
                            search(unmask(phone)) ||
-                           search(address) ||
-                           searchOfId(id!)
+                           search(address)
                         )
                         .map(({ id, name, cpf, email, phone, address }) => (
                            <Tr key={id}>
-                              <Td>{id}</Td>
-                              <Td>{name}</Td>
-                              <Td>{maskCPF(cpf)}</Td>
-                              <Td>{email}</Td>
-                              <Td>{maskPhone(phone)}</Td>
-                              <Td>{address}</Td>
+                              <Td><Highlight query={searchItemOnTable ? searchItemOnTable : 'null'} styles={{ bg: 'orange.100' }}>{String(id)}</Highlight></Td>
+                              <Td><Highlight query={searchItemOnTable ? searchItemOnTable : 'null'} styles={{ bg: 'orange.100' }}>{name}</Highlight></Td>
+                              <Td><Highlight query={searchItemOnTable ? searchItemOnTable : 'null'} styles={{ bg: 'orange.100' }}>{cpf}</Highlight></Td>
+                              <Td><Highlight query={searchItemOnTable ? searchItemOnTable : 'null'} styles={{ bg: 'orange.100' }}>{email}</Highlight></Td>
+                              <Td><Highlight query={searchItemOnTable ? searchItemOnTable : 'null'} styles={{ bg: 'orange.100' }}>{phone}</Highlight></Td>
+                              <Td><Highlight query={searchItemOnTable ? searchItemOnTable : 'null'} styles={{ bg: 'orange.100' }}>{address}</Highlight></Td>
                               <Td>
                                  <Button
                                     variant='solid'

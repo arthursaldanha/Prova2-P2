@@ -15,6 +15,7 @@ import {
    Td,
    TableCaption,
    TableContainer,
+   Highlight
 } from '@chakra-ui/react'
 import { Wrapper } from './styles';
 import { BooksServices } from '../../../domain/books/services/implementations/BooksServices';
@@ -22,6 +23,8 @@ import { Book } from '../../../domain/books/types'
 import { ModalCreateBook } from '../ModalCreateBook'
 import { format, parseISO } from 'date-fns'
 import { Dialog } from '../../components/AlertDialog'
+import { ModalDescriptionBook } from '../ModalDescriptionBook'
+import { formatPrice } from '../../utils/string'
 
 interface HomePresentationProps {
    books: Array<Book>
@@ -32,10 +35,12 @@ export const CreateBookPresentation: React.FC<HomePresentationProps> = ({ books 
 
    const { isOpen, onClose, onOpen } = useDisclosure();
    const dialogDelete = useDisclosure();
+   const modalDescription = useDisclosure();
 
    const [booksInDatabase, setBooksInDatabase] = useState<Array<Book>>(books);
    const [isEditBook, setIsEditBook] = useState<Book | null>(null);
    const [getIdToDelete, setGetIdToDelete] = useState<number | null>(null);
+   const [getDescriptionBook, setGetDescriptionBook] = useState<string>('')
    const [searchBookOnTable, setSearchBookOnTable] = useState('');
 
    const bookServices = new BooksServices()
@@ -126,6 +131,15 @@ export const CreateBookPresentation: React.FC<HomePresentationProps> = ({ books 
       return id.toString() === searchBookOnTable;
    }
 
+   const handleOpenModalDescription = (description: string) => {
+      if (!description) {
+         return;
+      }
+
+      setGetDescriptionBook(description);
+      modalDescription.onOpen();
+   }
+
    return (
       <Wrapper>
          <header>
@@ -137,7 +151,7 @@ export const CreateBookPresentation: React.FC<HomePresentationProps> = ({ books 
          ) : (
             <TableContainer width={'100%'}>
                <Table variant='simple'>
-                  <TableCaption>Imperial to metric conversion factors</TableCaption>
+                  <TableCaption>SM Systems</TableCaption>
                   <Thead>
                      <Tr>
                         <Th>ID</Th>
@@ -157,34 +171,28 @@ export const CreateBookPresentation: React.FC<HomePresentationProps> = ({ books 
                   <Tbody>
                      {booksInDatabase
                         .filter(({ id, name, author, edition, publicationYear, publishingCompany, price, mulct }) =>
-                           searchNumber(id!) ||
+                           search(String(id)) ||
                            search(name) ||
                            search(author) ||
                            search(edition) ||
-                           searchNumber(publicationYear ?? 0) ||
+                           search(String(publicationYear) ?? '') ||
                            search(publishingCompany ?? '') ||
                            searchNumber(price) ||
                            searchNumber(mulct)
                         )
                         .map(({ id, name, description, author, edition, publicationYear, publishingCompany, price, mulct }) => (
                            <Tr key={id}>
-                              <Td>{id}</Td>
-                              <Td>{name}</Td>
-                              <Td>{description ? description : '-'}</Td>
-                              <Td>{author}</Td>
-                              <Td>{edition}</Td>
-                              <Td>{publicationYear === 0 ? '-' : publicationYear}</Td>
-                              <Td>{publishingCompany ? publishingCompany : '-'}</Td>
-                              <Td>{price.toLocaleString('pt-BR', {
-                                 style: 'currency',
-                                 currency: 'BRL',
-                                 minimumFractionDigits: 2
-                              })}</Td>
-                              <Td>{mulct.toLocaleString('pt-BR', {
-                                 style: 'currency',
-                                 currency: 'BRL',
-                                 minimumFractionDigits: 2
-                              })}</Td>
+                              <Td><Highlight query={searchBookOnTable ? searchBookOnTable : 'null'} styles={{ bg: 'orange.100' }}>{String(id)}</Highlight></Td>
+                              <Td><Highlight query={searchBookOnTable ? searchBookOnTable : 'null'} styles={{ bg: 'orange.100' }}>{name}</Highlight></Td>
+                              <Td onClick={() => handleOpenModalDescription(description)}>
+                                 {description ? 'Ver mais' : 'Não possui'}
+                              </Td>
+                              <Td><Highlight query={searchBookOnTable ? searchBookOnTable : 'null'} styles={{ bg: 'orange.100' }}>{author}</Highlight></Td>
+                              <Td><Highlight query={searchBookOnTable ? searchBookOnTable : 'null'} styles={{ bg: 'orange.100' }}>{edition}</Highlight></Td>
+                              <Td><Highlight query={searchBookOnTable ? searchBookOnTable : 'null'} styles={{ bg: 'orange.100' }}>{publicationYear === 0 ? '-' : String(publicationYear)}</Highlight></Td>
+                              <Td><Highlight query={searchBookOnTable ? searchBookOnTable : 'null'} styles={{ bg: 'orange.100' }}>{publishingCompany ? publishingCompany : '-'}</Highlight></Td>
+                              <Td>{formatPrice(price)}</Td>
+                              <Td>{formatPrice(mulct)}</Td>
                               <Td>
                                  <Button
                                     variant='solid'
@@ -212,6 +220,7 @@ export const CreateBookPresentation: React.FC<HomePresentationProps> = ({ books 
                </Table>
             </TableContainer>
          )}
+         <ModalDescriptionBook isOpen={modalDescription.isOpen} onClose={modalDescription.onClose} description={getDescriptionBook} />
          <ModalCreateBook
             isOpen={isOpen}
             onClose={onClose}
