@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Input, useToast } from '@chakra-ui/react'
 import { useDisclosure } from '../../hooks/useDisclosure'
-
-import { MdModeEdit } from 'react-icons/md'
-import { BsFillTrashFill } from 'react-icons/bs'
 
 import {
    Button,
@@ -21,7 +18,6 @@ import { Wrapper } from './styles';
 import { BooksServices } from '../../../domain/books/services/implementations/BooksServices';
 import { Book } from '../../../domain/books/types'
 import { ModalCreateBook } from '../ModalCreateBook'
-import { format, parseISO } from 'date-fns'
 import { Dialog } from '../../components/AlertDialog'
 import { ModalDescriptionBook } from '../ModalDescriptionBook'
 import { formatPrice } from '../../utils/string'

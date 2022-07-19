@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useToast } from '@chakra-ui/react'
 import { useDisclosure } from '../../hooks/useDisclosure'
 import { ModalCreateCustomer } from '../ModalCreateCustomer';
 import { CustomerServices } from '../../../domain/customers/services/implementations/CustomerServices'
 import { Customer } from '../../../domain/customers/types'
-
-import { MdModeEdit } from 'react-icons/md'
-import { BsFillTrashFill } from 'react-icons/bs'
 
 import {
    Button,
@@ -24,7 +21,6 @@ import {
 import { Wrapper } from './styles';
 import { unmask } from '../../utils/regex';
 import { Dialog } from '../../components/AlertDialog';
-import { cpf as maskCPF, phone as maskPhone } from '../../utils/masks';
 
 interface HomePresentationProps {
    customers: Array<Customer>

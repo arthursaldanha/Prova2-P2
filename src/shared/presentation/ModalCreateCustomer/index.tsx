@@ -43,6 +43,7 @@ export const ModalCreateCustomer: React.FC<ModalCreateCustomerProps> = ({ isOpen
             return;
          }
          onCreateCustomer(values)
+         formik.resetForm();
       },
    })
 

@@ -148,7 +148,7 @@ export const ModalCreateBook: React.FC<ModalCreateBookProps> = ({ isOpen, onClos
                   </FormControl>
 
                   <FormControl isInvalid={!!errors.publicationYear && touched.publicationYear} style={{ marginBottom: '16px' }}>
-                     <FormLabel htmlFor='publicationYear'>Data de publicação:</FormLabel>
+                     <FormLabel htmlFor='publicationYear'>Ano de publicação:</FormLabel>
                      <Input
                         id='publicationYear'
                         name='publicationYear'

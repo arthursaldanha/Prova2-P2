@@ -16,7 +16,9 @@ const isCheckingYear = (value: string) => {
    const currentYear = new Date().getFullYear();
    const formattedYear = Number(value ?? 0);
 
-   if (currentYear > formattedYear) return false
+   if (formattedYear > currentYear) return false
+   if (formattedYear < 0) return false
+   if (String(formattedYear).length !== 4) return false
 
    return true
 };

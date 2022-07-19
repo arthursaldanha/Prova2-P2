@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useToast } from '@chakra-ui/react'
 import { useDisclosure } from '../../hooks/useDisclosure'
 import { CustomerServices } from '../../../domain/customers/services/implementations/CustomerServices'
-
-import { MdModeEdit } from 'react-icons/md'
-import { BsFillTrashFill } from 'react-icons/bs'
 
 import {
    Button,
@@ -29,7 +26,6 @@ import { Customer } from '../../../domain/customers/types'
 import { Book } from '../../../domain/books/types'
 import { BooksServices } from '../../../domain/books/services/implementations/BooksServices'
 import { Dialog } from '../../components/AlertDialog'
-import { cpf as maskCPF } from '../../utils/masks';
 import { formatPrice } from '../../utils/string'
 
 interface HomePresentationProps {

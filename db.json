@@ -1,103 +1,102 @@
 {
   "customer": [
     {
-      "name": "Arthur Saldanha de Oliveira Santana",
-      "cpf": "33408947520",
-      "email": "kdjaskdja@jfskjfk.com",
-      "phone": "79981169065",
-      "address": "Rua Laurindo Cerqueira",
+      "name": "Bianca Catarina Pietra Cardoso",
+      "cpf": "13637217635",
+      "email": "bianca.catarina.cardoso@viasegbrasil.com.br",
+      "phone": "27998935677",
+      "address": "Praça Zenith Côgo Cândido, 204, Vitória, ES",
       "id": 1
     },
     {
-      "name": "Pedro Gustavo",
-      "cpf": "62840690578",
-      "email": "arthur.santana@farmaciasapp.com.br",
-      "phone": "75912345678",
-      "address": "Praça José Ferreira da Silva",
+      "name": "Arthur Ryan das Neves",
+      "cpf": "36808676542",
+      "email": "arthur_dasneves@origembr.com",
+      "phone": "61981491774",
+      "address": "Quadra QNO 6 Conjunto L, 361, Brasília, DF",
       "id": 2
     },
     {
-      "name": "Arthur Saldanha de Oliveira Santana",
-      "cpf": "04671021552",
-      "email": "saldanhadev@gmail.com",
-      "phone": "79981169065",
-      "address": "Rua Laurindo Cerqueira",
+      "name": "Sebastiana Isadora Viana",
+      "cpf": "00582527112",
+      "email": "sebastiana_isadora_viana@sorocaba.com",
+      "phone": "66993075669",
+      "address": "Rua Jesulino Moreira Prates, 468, Rondonópolis, MT",
+      "id": 3
+    },
+    {
+      "name": "Mariah Raquel Milena Moura",
+      "cpf": "93495095470",
+      "email": "mariah.raquel.moura@poli.ufrj.br",
+      "phone": "66986858546",
+      "address": "Rua Ana Matos, 542, Jardim Primavera I, Rondonópolis, MT",
       "id": 4
+    },
+    {
+      "name": "Giovana Lara da Mota",
+      "cpf": "27876844405",
+      "email": "giovana_damota@diebold.com",
+      "phone": "85998440848",
+      "address": "Avenida Sargento Hermínio Sampaio, 547, Fortaleza, CE",
+      "id": 5
     }
   ],
   "books": [
     {
-      "name": "A Revolução dos Bichos",
-      "description": "-",
+      "name": "A revolução dos bichos",
+      "description": "Verdadeiro clássico moderno, concebido por um dos mais influentes escritores do século XX, A revolução dos bichos é uma fábula sobre o poder. Narra a insurreição dos animais de uma granja contra seus donos. Progressivamente, porém, a revolução degenera numa tirania ainda mais opressiva que a dos humanos.\nEscrita em plena Segunda Guerra Mundial e publicada em 1945 depois de ter sido rejeitada por várias editoras, essa pequena narrativa causou desconforto ao satirizar ferozmente a ditadura stalinista numa época em que os soviéticos ainda eram aliados do Ocidente na luta contra o eixo nazifascista. De fato, são claras as referências: o despótico Napoleão seria Stálin, o banido Bola-de-Neve seria Trotsky, e os eventos políticos - expurgos, instituição de um estado policial, deturpação tendenciosa da História - mimetizam os que estavam em curso na União Soviética. Com o acirramento da Guerra Fria, as mesmas razões que causaram constrangimento na época de sua publicação levaram A revolução dos bichos a ser amplamente usada pelo Ocidente nas décadas seguintes como arma ideológica contra o comunismo. O próprio Orwell, adepto do socialismo e inimigo de qualquer forma de manipulação política, sentiu-se incomodado com a utilização de sua fábula como panfleto. Depois das profundas transformações políticas que mudaram a fisionomia do planeta nas últimas décadas, a pequena obra-prima de Orwell pode ser vista sem o viés ideológico reducionista. Mais de sessenta anos depois de escrita, ela mantém o viço e o brilho de uma alegoria perene sobre as fraquezas humanas que levam à corrosão dos grandes projetos de revolução política. É irônico que o escritor, para fazer esse retrato cruel da humanidade, tenha recorrido aos animais como personagens. De certo modo, a inteligência política que humaniza seus bichos é a mesma que animaliza os homens. Escrito com perfeito domínio da narrativa, atenção às minúcias e extraordinária capacidade de criação de personagens e situações, A revolução dos bichos combina de maneira feliz duas ricas tradições literárias: a das fábulas morais, que remontam a Esopo, e a da sátira política, que teve talvez em Jonathan Swift seu representante máximo. \"A melhor sátira já escrita sobre a face negra da história moderna.\" Malcolm Bradbury \"Um livro para todos os tipos de leitor, seu brilho ainda intacto depois de sessenta anos.\" Ruth Rendell",
       "author": "George Orwell",
-      "edition": "1ª",
-      "publicationYear": "1975",
+      "edition": "1º",
+      "publicationYear": 2007,
       "publishingCompany": "Companhia das Letras",
-      "price": 32.2,
-      "mulct": 32,
+      "price": 9.99,
+      "mulct": 2.67,
       "id": 1
     },
     {
-      "name": "fefwefwe",
-      "description": "fwefwefwe",
-      "author": "fwefwefwe",
-      "edition": "fwefwefwef",
-      "publicationYear": 2022,
-      "publishingCompany": "fweffaff",
-      "price": 23,
-      "mulct": 11,
+      "name": "O homem mais rico da Babilônia",
+      "description": "Com mais de dois milhões de exemplares vendidos no mundo todo, O homem mais rico da Babilônia é um clássico sobre como multiplicar riqueza e solucionar problemas financeiros. Baseando-se nos segredos de sucesso dos antigos babilônicos ― os habitantes da cidade mais rica e próspera de seu tempo ―, George S. Clason mostra soluções ao mesmo tempo sábias e muito atuais para evitar a falta de dinheiro, como não desperdiçar recursos durante tempos de opulência, buscar conhecimento e informação em vez de apenas lucro, assegurar uma renda para o futuro, manter a pontualidade no pagamento de dívidas e, sobretudo, cultivar as próprias aptidões, tornando-se cada vez mais habilidoso e consciente.",
+      "author": "George S Clason",
+      "edition": "1º",
+      "publicationYear": 2017,
+      "publishingCompany": "HarperCollins",
+      "price": 16.89,
+      "mulct": 5.31,
       "id": 2
     },
     {
-      "name": "Atlassian | BitBucket",
-      "description": "dqwd",
-      "author": "dqw",
-      "edition": "dqw",
-      "publicationYear": 2022,
-      "publishingCompany": "dqwd",
-      "price": 23,
-      "mulct": 32,
+      "name": "Extraordinário",
+      "description": "Lançado no Brasil originalmente em 2013, Extraordinário é daqueles livros únicos, marcantes, cuja mensagem ressoa com a mesma força não importa quantas vezes você leia. A história de um menino de aparência incomum, mas de coragem e coração enormes: August Pullman, o Auggie, que nasceu com uma severa deformidade facial e agora, aos 10 anos, vai frequentar a escola pela primeira vez. Um grande passo para qualquer criança e maior ainda para o garotinho cujo maior desejo é ser invisível. Mas Auggie, definitivamente, não nasceu para deixar de ser notado. Enquanto tenta vencer seus medos e se integrar em um mundo completamente novo, sua presença desencadeia as mais diferentes reações — algumas boas, outras nem tanto, mas todas profundamente transformadoras. Um romance comovente, poderoso e impossível de ignorar.\n\nAdaptado para os cinemas e estrelado pelo jovem Jacob Tremblay e por Julia Roberts, Extraordinário é relançado nesta edição especial comemorativa do filme, com novo posfácio da autora, fotos de bastidores e depoimentos que dão conta do impacto da mensagem de Extraordinário na vida dos artistas envolvidos na megaprodução. Um conteúdo inédito e exclusivo.",
+      "author": "Raquel Jaramillo Palacio",
+      "edition": "1º",
+      "publicationYear": 2013,
+      "publishingCompany": "Intrínseca",
+      "price": 31.99,
+      "mulct": 8.79,
       "id": 3
     },
     {
-      "name": "fwefwe",
-      "description": "",
-      "author": "fwefew fwefew",
-      "edition": "fwef",
-      "publicationYear": 2022,
-      "publishingCompany": "fwefw",
-      "price": 2,
-      "mulct": 2,
+      "name": "O sol é para todos",
+      "description": "Um dos maiores clássicos da literatura mundial.\n\nNesta emocionante história ambientada no Sul dos Estados Unidos da década de 1930, região envenenada pela violência do preconceito racial, vemos um mundo de grande beleza e ferozes desigualdades através dos olhos de uma menina de inteligência viva e questionadora, enquanto seu pai, um advogado local, arrisca tudo para defender um homem negro injustamente acusado de cometer um terrível crime.\n\nUma história sobre raça e classe, inocência e justiça, hipocrisia e heroísmo, tradição e transformação, O sol é para todos permanece tão importante hoje quanto foi em sua primeira edição, em 1960, durante os anos turbulentos da luta pelos direitos civis dos negros nos Estados Unidos.\n\nConsiderado um dos romances norte-americanos mais importantes do século XX, O sol é para todos surpreende pela atualidade de seu enredo e estilo. A lamentável permanência do tema, o racismo, percorre a narrativa de Scout, criança sensível, filha do advogado Atticus Finch, responsável pela defesa de um homem negro acusado de estuprar uma mulher branca em Maycomb, pequeno município de Alabama, no sul dos Estados Unidos, no início dos anos 1930.Os sentimentos que cercam a família e a cidade de Scout - desde que Atticus se dispôs a cuidar do famigerado caso - são nossos velhos conhecidos: preconceito racial e social, conformismo diante das injustiças e a mais pura malícia destilada em relações banais e familiares. Apesar da crua humanidade desses personagens, Scout enxerga a realidade com o frescor dos olhos infantis, e conta sua história, deixando um improvável rastro de esperança.\n\nScout narra a rotina de um ambiente rural e pacato, as férias de verão com o irmão, Jem, e o melhor amigo deles, Dill, a curiosidade com os vizinhos, as travessuras inventadas, as aventuras na escola e a vida em família.\n\nO conjunto de pequenos casos nos transporta a um lugar de aparente quietude. No entanto, esse suposto relaxamento se transforma e desespero quando vemos a reação da população de Maycomb diante de denúncia contra Tom Robinson.\n\nO sol é para todos ganhou o Prêmio Pulitzer em 1961 e deu origem a um filme homônimo, vencedor do Oscar de melhor roteiro adaptado, em 1962. Lançado pela primeira vez em 1960, até hoje vende mais de um milhão de cópias por ano em língua inglesa. Uma história atemporal sobre tolerância, perda da inocência e conceito de justiça.",
+      "author": "Harper Lee",
+      "edition": "49º",
+      "publicationYear": 2006,
+      "publishingCompany": "José Olympio",
+      "price": 41.94,
+      "mulct": 13.26,
       "id": 4
+    },
+    {
+      "name": "E não sobrou nenhum",
+      "description": "Uma ilha misteriosa, um poema infantil, dez soldadinhos de porcelana e muito suspense são os ingredientes com que Agatha Christie constrói seu romance mais importante. Na ilha do Soldado, antiga propriedade de um milionário norte-americano, dez pessoas sem nenhuma ligação aparente são confrontadas por uma voz misteriosa com fatos marcantes de seus passados.\n\nConvidados pelo misterioso mr. Owen, nenhum dos presentes tem muita certeza de por que estão ali, a despeito de conjecturas pouco convincentes que os leva a crer que passariam um agradável período de descanso em mordomia. Entretanto, já na primeira noite, o mistério e o suspense se abatem sobre eles e, num instante, todos são suspeitos, todos são vítimas e todos são culpados.\n\nÉ neste clima de tensão e desconforto que as mortes inexplicáveis começam e, sem comunicação com o continente devido a uma forte tempestade, a estadia transforma-se em um pesadelo. Todos se perguntam: quem é o misterioso anfitrião, mr. Owen? Existe mais alguém na ilha? O assassino pode ser um dos convidados? Que mente ardilosa teria preparado um crime tão complexo? E, sobretudo, por quê?\n\nSão essas e outras perguntas que o leitor será desafiado a resolver neste fabuloso romance de Agatha Christie, que envolve os espíritos mais perspicazes num complexo emaranhado de situações, lembranças e acusações na busca deste sagaz assassino. Medo, confinamento e angústia: que o leitor descubra por si mesmo porque E não sobrou nenhum foi eleito o melhor romance policial de todos os tempos.",
+      "author": "Agatha Christie",
+      "edition": "4º",
+      "publicationYear": 2014,
+      "publishingCompany": "Globo Livros",
+      "price": 31.11,
+      "mulct": 4.85,
+      "id": 5
     }
   ],
-  "rent": [
-    {
-      "customer": {
-        "name": "Arthur Saldanha de Oliveira Santana",
-        "cpf": "04671021552",
-        "email": "saldanhadev@gmail.com",
-        "phone": "79981169065",
-        "address": "Rua Laurindo Cerqueira",
-        "id": 4
-      },
-      "book": {
-        "name": "A Revolução dos Bichos",
-        "description": "-",
-        "author": "George Orwell",
-        "edition": "1ª",
-        "publicationYear": "1975",
-        "publishingCompany": "Companhia das Letras",
-        "price": 32.2,
-        "mulct": 32,
-        "id": 1
-      },
-      "prices": {
-        "totalDays": 2,
-        "totalPrice": 64.4,
-        "possiblyMulct": 64
-      },
-      "id": 2
-    }
-  ]
+  "rent": []
 }
