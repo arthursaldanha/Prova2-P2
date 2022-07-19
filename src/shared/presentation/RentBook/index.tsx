@@ -121,10 +121,6 @@ export const CreateRentPresentation: React.FC<HomePresentationProps> = ({ rents 
       return filter.toLowerCase().includes(searchItemOnTable.toLowerCase());
    }
 
-   function searchOfNumber(id: number) {
-      return id.toString() === searchItemOnTable;
-   }
-
    return (
       <Wrapper>
          <header>
@@ -146,12 +142,17 @@ export const CreateRentPresentation: React.FC<HomePresentationProps> = ({ rents 
                         <Th>Autor</Th>
                         <Th>Edição</Th>
                         <Th>
+                           <Tooltip label='Dias escolhidos para alugar.' placement='top'>
+                              Dias
+                           </Tooltip>
+                        </Th>
+                        <Th>
                            <Tooltip label='Valor a ser pago para locar o livro.' placement='top'>
                               Valor
                            </Tooltip>
                         </Th>
                         <Th>
-                           <Tooltip label='Valor a ser pago caso o cliente atrase a devolução do livro.' placement='top'>
+                           <Tooltip label='Valor pago por dia em caso de atraso.' placement='top'>
                               Multa
                            </Tooltip>
                         </Th>
@@ -164,7 +165,7 @@ export const CreateRentPresentation: React.FC<HomePresentationProps> = ({ rents 
                            id,
                            customer: { name, cpf },
                            book: { name: title, author, edition },
-                           prices: { totalPrice, possiblyMulct }
+                           prices: { totalDays, totalPrice, possiblyMulct }
                         }) =>
                            search(String(id)) ||
                            search(name) ||
@@ -172,6 +173,7 @@ export const CreateRentPresentation: React.FC<HomePresentationProps> = ({ rents 
                            search(title) ||
                            search(author) ||
                            search(edition) ||
+                           search(String(totalDays)) ||
                            search(String(totalPrice) ?? '') ||
                            search(String(possiblyMulct) ?? '')
                         )
@@ -179,7 +181,7 @@ export const CreateRentPresentation: React.FC<HomePresentationProps> = ({ rents 
                            id,
                            customer: { name, cpf },
                            book: { name: title, author, edition },
-                           prices: { totalPrice, possiblyMulct }
+                           prices: { totalDays, totalPrice, possiblyMulct }
                         }) => (
                            <Tr key={id}>
                               <Td><Highlight query={searchItemOnTable ? searchItemOnTable : 'null'} styles={{ bg: 'orange.100' }}>{String(id)}</Highlight></Td>
@@ -188,6 +190,7 @@ export const CreateRentPresentation: React.FC<HomePresentationProps> = ({ rents 
                               <Td><Highlight query={searchItemOnTable ? searchItemOnTable : 'null'} styles={{ bg: 'orange.100' }}>{title}</Highlight></Td>
                               <Td><Highlight query={searchItemOnTable ? searchItemOnTable : 'null'} styles={{ bg: 'orange.100' }}>{author}</Highlight></Td>
                               <Td><Highlight query={searchItemOnTable ? searchItemOnTable : 'null'} styles={{ bg: 'orange.100' }}>{edition}</Highlight></Td>
+                              <Td><Highlight query={searchItemOnTable ? searchItemOnTable : 'null'} styles={{ bg: 'orange.100' }}>{String(totalDays)}</Highlight></Td>
                               <Td>{formatPrice(totalPrice)}</Td>
                               <Td>{formatPrice(possiblyMulct)}</Td>
                               <Td>

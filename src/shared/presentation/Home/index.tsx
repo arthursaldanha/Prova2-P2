@@ -119,10 +119,6 @@ export const HomePresentation: React.FC<HomePresentationProps> = ({ customers })
       return filter.toLowerCase().includes(searchItemOnTable.toLowerCase());
    }
 
-   function searchOfId(id: number) {
-      return id.toString() === searchItemOnTable;
-   }
-
    return (
       <Wrapper>
          <header>

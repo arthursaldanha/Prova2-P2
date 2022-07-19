@@ -55,8 +55,10 @@ export const ModalRentBook: React.FC<ModalRentBookProps> = ({ isOpen, onClose, a
          const totalValuesAfterRent = {
             totalDays: daysToRent,
             totalPrice: daysToRent * price,
-            possiblyMulct: daysToRent * mulct
+            possiblyMulct: mulct
          }
+
+         console.log(totalValuesAfterRent);
 
          const customer = customerParsed;
          const book = bookParsed
